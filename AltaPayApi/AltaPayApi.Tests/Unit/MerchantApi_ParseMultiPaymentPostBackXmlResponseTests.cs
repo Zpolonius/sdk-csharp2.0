@@ -1,6 +1,8 @@
 using System;
 using NUnit.Framework;
 using AltaPay.Api.Tests;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assert = NUnit.Framework.Assert;
 
 namespace AltaPay.Service.Tests.Unit
 {
@@ -14,9 +16,9 @@ namespace AltaPay.Service.Tests.Unit
 			
 			var merchantApi = new MerchantApi("url", "username", "password");
 			MultiPaymentApiResult result = merchantApi.ParseMultiPaymentPostBackXmlResponse(xmlResponse);
-			
-			Assert.AreEqual(false, result.HasAnyFailedPaymentActions());
-			Assert.AreEqual(2, result.PaymentActions.Count);
+
+            Assert.AreEqual(false, result.HasAnyFailedPaymentActions());
+            Assert.AreEqual(2, result.PaymentActions.Count);
 			
 			Assert.AreEqual(Result.Success, result.PaymentActions[0].Result);
 			Assert.AreEqual(12.34m, result.PaymentActions[0].Payment.ReservedAmount);

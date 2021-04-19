@@ -4,6 +4,8 @@ using NUnit.Framework;
 using AltaPay.Api.Tests;
 using AltaPay.Service.Loggers;
 using System.Reflection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assert = NUnit.Framework.Assert;
 
 namespace AltaPay.Service.Tests.Unit
 {
@@ -51,8 +53,8 @@ namespace AltaPay.Service.Tests.Unit
 
 			PaymentResult pr = actual as PaymentResult;
 
-			Assert.AreEqual(Result.Cancelled, actual.Result);
-			Assert.AreEqual("epayment_cancelled", pr.Payment.TransactionStatus);
+            NUnit.Framework.Assert.AreEqual(Result.Cancelled, actual.Result);
+            NUnit.Framework.Assert.AreEqual("epayment_cancelled", pr.Payment.TransactionStatus);
 		}
 	
 		
@@ -82,7 +84,7 @@ namespace AltaPay.Service.Tests.Unit
 			var merchantApi = new MerchantApi("url", "username", "password", logger);
 			ApiResult actual = merchantApi.ParsePostBackXmlResponse(xmlResponse);
 
-			Assert.AreEqual(Result.Error, actual.Result);
+            NUnit.Framework.Assert.AreEqual(Result.Error, actual.Result);
 		}
 
 		[Test]
@@ -97,7 +99,7 @@ namespace AltaPay.Service.Tests.Unit
 			var merchantApi = new MerchantApi("url", "username", "password", logger);
 			ApiResult actual = merchantApi.ParsePostBackXmlResponse(xmlResponse);
 
-			Assert.AreEqual(Result.ChargebackEvent, actual.Result);
+            NUnit.Framework.Assert.AreEqual(Result.ChargebackEvent, actual.Result);
 		}
 
 		[Test]
@@ -114,7 +116,7 @@ namespace AltaPay.Service.Tests.Unit
                 + "CardHolderMessageMustBeShownFalse.xml");
 
 			ApiResult actual = merchantApi.ParsePostBackXmlResponse(xmlResponse);
-			Assert.AreEqual(false, actual.ResultMessageMustBeShown);
+            Assert.AreEqual(false, actual.ResultMessageMustBeShown);
 			xmlResponse = File.ReadAllText(_baseProjectPath + Path.DirectorySeparatorChar
                 + "Unit" + Path.DirectorySeparatorChar + "txt" + Path.DirectorySeparatorChar 
                 + "CardHolderMessageMustBeShownTrue.xml");
