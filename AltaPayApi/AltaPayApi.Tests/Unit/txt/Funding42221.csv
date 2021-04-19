@@ -1,0 +1,2 @@
+Date;Type;ID;"Reconciliation Identifier";Payment;Order;Terminal;Shop;"Transaction Currency";"Transaction Amount";"Exchange Rate";"Settlement Currency";"Settlement Amount";"Fixed Fee";"Fixed Fee VAT";"Rate Based Fee";"Rate Based Fee VAT"
+2016-05-27;payment;385a159f-dc8a-4f25-926f-b57bb985a875;6800;10029471;SLS00000925;"Lars Bertelsen Test Terminal";"Lars Bertelsen";USD;86.56;73.64800;EUR;63.75;-0.25;0.00;-0.86;0.00

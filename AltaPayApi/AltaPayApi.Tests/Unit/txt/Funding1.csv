@@ -1,0 +1,3 @@
+Date;Type;ID;"Reconciliation Identifier";Payment;Order;Terminal;Shop;"Transaction Currency";"Transaction Amount";"Exchange Rate";"Settlement Currency";"Settlement Amount";"Fixed Fee";"Fixed Fee VAT";"Rate Based Fee";"Rate Based Fee VAT"
+2010-12-24;fee;"Monthly fee";;;;;"AltaPay Functional Test Shop";EUR;;;EUR;;;;;
+2010-12-24;payment;FunctionalTestContractID-record1;;;;;"AltaPay Functional Test Shop";EUR;;;EUR;;;;;

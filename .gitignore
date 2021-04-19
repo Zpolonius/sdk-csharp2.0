@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+dist
+*.pidb
+*.userprefs
+*bin/
+*test-results/
+*obj/
+*.suo
+
+.idea/workspace.xml

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0"?>
+<APIResponse version="20151228">
+    <Header>
+        <Date>2016-06-15T04:16:32+02:00</Date>
+        <Path/>
+        <ErrorCode>0</ErrorCode>
+        <ErrorMessage/>
+    </Header>
+    <Body>
+        <Result>ChargebackEvent</Result>
+        <Transactions>
+            <Transaction>
+                <TransactionId>1735461</TransactionId>
+                <PaymentId>9b60542b-22ff-43fb-af4a-abee55e8daec</PaymentId>
+                <AuthType>payment</AuthType>
+                <CardStatus>SoonExpired</CardStatus>
+                <CreditCardExpiry>
+                    <Year>2016</Year>
+                    <Month>09</Month>
+                </CreditCardExpiry>
+                <CreditCardToken>b2fb45be5ff7a46cb81bf0f737d3fcd50fafca64</CreditCardToken>
+                <CreditCardMaskedPan>543554******1693</CreditCardMaskedPan>
+                <ThreeDSecureResult>Disabled</ThreeDSecureResult>
+                <LiableForChargeback>Merchant</LiableForChargeback>
+                <CVVCheckResult>Matched</CVVCheckResult>
+                <BlacklistToken>c6dcf255259ee295daeb257a546659cc32b91b08</BlacklistToken>
+                <ShopOrderId>23105009</ShopOrderId>
+                <Shop>Bon A Parte</Shop>
+                <Terminal>Bon A Parte CC SEK</Terminal>
+                <TransactionStatus>captured</TransactionStatus>
+                <ReasonCode>NONE</ReasonCode>
+                <MerchantCurrency>752</MerchantCurrency>
+                <MerchantCurrencyAlpha>SEK</MerchantCurrencyAlpha>
+                <CardHolderCurrency>752</CardHolderCurrency>
+                <CardHolderCurrencyAlpha>SEK</CardHolderCurrencyAlpha>
+                <ReservedAmount>10420.00</ReservedAmount>
+                <CapturedAmount>10420.00</CapturedAmount>
+                <RefundedAmount>0.00</RefundedAmount>
+                <CreditedAmount>0.00</CreditedAmount>
+                <RecurringDefaultAmount>0.00</RecurringDefaultAmount>
+                <SurchargeAmount>0.00</SurchargeAmount>
+                <CreatedDate>2016-05-13 10:21:48</CreatedDate>
+                <UpdatedDate>2016-06-15 04:16:32</UpdatedDate>
+                <PaymentNature>CreditCard</PaymentNature>
+                <PaymentSchemeName>MasterCard</PaymentSchemeName>
+                <PaymentNatureService name="ValitorAcquirer">
+                    <SupportsRefunds>true</SupportsRefunds>
+                    <SupportsRelease>true</SupportsRelease>
+                    <SupportsMultipleCaptures>true</SupportsMultipleCaptures>
+                    <SupportsMultipleRefunds>true</SupportsMultipleRefunds>
+                </PaymentNatureService>
+                <AddressVerification>S</AddressVerification>
+                <AddressVerificationDescription>AVS not supported</AddressVerificationDescription>
+                <ChargebackEvents>
+                    <ChargebackEvent>
+                        <Date>2016-06-14T00:00:00+02:00</Date>
+                        <Type>Chargeback</Type>
+                        <ReasonCode>4837</ReasonCode>
+                        <Reason>No Cardholder Authorization</Reason>
+                        <Amount>10420.00</Amount>
+                        <Currency>SEK</Currency>
+                        <AcquirerTransactionId>613408247246</AcquirerTransactionId>
+                        <AdditionalInfo>&lt;additional_info&gt;&lt;info_element&gt;&lt;key&gt;transaction_code&lt;/key&gt;&lt;value&gt;15&lt;/value&gt;&lt;/info_element&gt;&lt;info_element&gt;&lt;key&gt;original_transaction_amount&lt;/key&gt;&lt;value&gt;000001042000&lt;/value&gt;&lt;/info_element&gt;&lt;info_element&gt;&lt;key&gt;original_batch_id&lt;/key&gt;&lt;value&gt;0000000199&lt;/value&gt;&lt;/info_element&gt;&lt;info_element&gt;&lt;key&gt;document_indicator&lt;/key&gt;&lt;value&gt;1&lt;/value&gt;&lt;/info_element&gt;&lt;info_element&gt;&lt;key&gt;processing_date&lt;/key&gt;&lt;value&gt;2016-06-14&lt;/value&gt;&lt;/info_element&gt;&lt;/additional_info&gt;</AdditionalInfo>
+                    </ChargebackEvent>
+                </ChargebackEvents>
+                <PaymentInfos/>
+                <CustomerInfo>
+                    <UserAgent>Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36</UserAgent>
+                    <IpAddress>37.17.250.204</IpAddress>
+                    <Email>
+                        <![CDATA[leila3_girl@hotmail.com]]>
+                    </Email>
+                    <Username>
+                        <![CDATA[leyla ali]]>
+                    </Username>
+                    <CustomerPhone>0728600270</CustomerPhone>
+                    <OrganisationNumber/>
+                    <CountryOfOrigin>
+                        <Country>CZ</Country>
+                        <Source>CardNumber</Source>
+                    </CountryOfOrigin>
+                    <BillingAddress>
+                        <Firstname>
+                            <![CDATA[leyla]]>
+                        </Firstname>
+                        <Lastname>
+                            <![CDATA[ali]]>
+                        </Lastname>
+                        <Address>
+                            <![CDATA[visgatan 16 A]]>
+                        </Address>
+                        <City>
+                            <![CDATA[örebro]]>
+                        </City>
+                        <Region/>
+                        <Country>
+                            <![CDATA[SE]]>
+                        </Country>
+                        <PostalCode>
+                            <![CDATA[70372]]>
+                        </PostalCode>
+                    </BillingAddress>
+                    <ShippingAddress>
+                        <Firstname>
+                            <![CDATA[ICA Maxi (eurostop)]]>
+                        </Firstname>
+                        <Lastname>
+                            <![CDATA[leyla ali]]>
+                        </Lastname>
+                        <Address>
+                            <![CDATA[Boglundsgatan 2 Spelbutik Box 1916]]>
+                        </Address>
+                        <City>
+                            <![CDATA[Örebro]]>
+                        </City>
+                        <Region/>
+                        <Country>
+                            <![CDATA[SE]]>
+                        </Country>
+                        <PostalCode>
+                            <![CDATA[70374]]>
+                        </PostalCode>
+                    </ShippingAddress>
+                </CustomerInfo>
+                <ReconciliationIdentifiers>
+                    <ReconciliationIdentifier>
+                        <Id>10231715</Id>
+                        <Amount currency="752">10420.00</Amount>
+                        <Type>captured</Type>
+                        <Date>2016-05-18T17:50:08+02:00</Date>
+                    </ReconciliationIdentifier>
+                </ReconciliationIdentifiers>
+            </Transaction>
+        </Transactions>
+    </Body>
+</APIResponse>

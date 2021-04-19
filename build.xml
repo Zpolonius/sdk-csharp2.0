@@ -1,0 +1,179 @@
+<project name="ValitorOmniCSharpSDK" default="Build">
+
+    <property name="build.configuration" value="Release" />
+    <property name="tmp" value="_tmp" />
+
+    <!--  Tag section here   -->
+    <target name="-getGitRevisionHash">
+        <exec executable="git" outputProperty="GitHash" failonerror="true">
+            <arg value="rev-list"/>
+            <arg value="--tags"/>
+            <arg value="--max-count=1"/>
+        </exec>
+    </target>
+    <target name="-getGitLastTag" depends="-getGitRevisionHash">
+        <exec executable="git" outputProperty="GitLastTag">
+            <arg value="describe"/>
+            <arg value="--tags"/>
+            <arg value="${GitHash}"/>
+        </exec>
+        <condition property="GitLastTag" value="1.0.0">
+            <equals arg1="${GitLastTag}" arg2="" />
+        </condition>
+    </target>
+
+    <target name="SetAltaPayTagVersion" depends="-getGitLastTag">
+        <echo file="AltaPayApi/AltaPayApi/Properties/SdkVersion.cs">
+using System;
+using System.Reflection;
+[assembly: AssemblyVersion("${GitLastTag}")]
+[assembly: AssemblyFileVersion("${GitLastTag}")]</echo>
+    </target>
+    <!--  Tag section ends here   -->
+
+    <target name="pensio.revision" description="Store git revision in ${pensio.revision}">
+        <exec executable="git" outputproperty="pensio.revision" failifexecutionfails="true" errorproperty="">
+            <arg value="describe"/>
+            <arg value="--tags"/>
+            <arg value="--always"/>
+            <arg value="HEAD"/>
+        </exec>
+        <condition property="repository.version" value="${git.revision}" else="unknown">
+            <and>
+                <isset property="git.revision"/>
+                <length string="${git.revision}" trim="yes" length="0" when="greater"/>
+            </and>
+        </condition>
+    </target>
+
+    <target name="pensio.release">
+        <exec executable="git" outputProperty="git.lastcommitdate.ci" failifexecutionfails="true">
+            <arg value="log" />
+            <arg value="-1" />
+            <arg value="--format=%ci" />
+        </exec>
+
+        <exec executable="date" outputProperty="pensio.release" failifexecutionfails="true">
+            <arg value="+%Y%m%d_%H%M%S" />
+            <arg value="-d" />
+            <arg value="${git.lastcommitdate.ci}" />
+        </exec>
+
+        <exec executable="date" outputProperty="pensio.version" failifexecutionfails="true">
+            <arg value="+%Y.%m.%d.%H%M" />
+            <arg value="-d" />
+            <arg value="${git.lastcommitdate.ci}" />
+        </exec>
+    </target>
+
+
+    <target name="SetAltaPayVersion" depends="pensio.release">
+        <echo file="AltaPayApi/AltaPayApi/Properties/SdkVersion.cs">
+using System;
+using System.Reflection;
+[assembly: AssemblyVersion("${pensio.version}")]
+[assembly: AssemblyFileVersion("${pensio.version}")]</echo>
+    </target>
+
+    <target name="ClearBuilds">
+        <delete includeEmptyDirs="true">
+            <fileset dir="AltaPayApi" includes="**/bin/**" />
+        </delete>
+    </target>
+
+    <target name="Compile" depends="ClearBuilds">
+        <exec executable="xbuild" failonerror="true">
+            <arg value="/p:Configuration=${build.configuration}" />
+            <arg value="AltaPayApi/AltaPayApi.sln" />
+        </exec>
+    </target>
+
+    <target name="CompileDebug" depends="ClearBuilds">
+        <exec executable="xbuild" failonerror="true">
+            <arg value="/p:Configuration=Debug" />
+            <arg value="AltaPayApi/AltaPayApi.sln" />
+        </exec>
+    </target>
+
+    <target name="EnsureTmp">
+        <delete dir="${tmp}"/>
+        <mkdir dir="${tmp}"/>
+        <mkdir dir="${tmp}/source"/>
+    </target>
+
+    <target name="BuildTag" depends="SetAltaPayTagVersion,-getGitLastTag,Compile,EnsureTmp">
+
+        <copy todir="${tmp}/">
+            <fileset dir="AltaPayApi/AltaPayApi/bin/${build.configuration}/" includes="*.dll" />
+            <fileset dir="AltaPayApi/AltaPayApi/bin/${build.configuration}/" includes="*.xml" />
+        </copy>
+
+        <copy todir="${tmp}/source">
+            <fileset dir="AltaPayApi/" includes="**/*.cs" />
+            <fileset dir="AltaPayApi/" includes="**/*.csproj" />
+            <fileset dir="AltaPayApi/" includes="**/*.sln" />
+            <fileset dir="AltaPayApi/" includes="**/*.dll" />
+            <fileset dir="AltaPayApi/" includes="**/*.xml" />
+            <fileset dir="AltaPayApi/" includes="**/*.nunit" />
+            <fileset dir="AltaPayApi/" includes="**/*.csv" />
+        </copy>
+
+        <zip destfile="dist/${ant.project.name}_${GitLastTag}.zip">
+            <fileset dir="${tmp}">
+            </fileset>
+        </zip>
+
+        <delete dir="${tmp}" />
+    </target>
+
+    <target name="Build" depends="SetAltaPayVersion,pensio.release,pensio.revision,Compile,EnsureTmp">
+
+        <copy todir="${tmp}/">
+            <fileset dir="AltaPayApi/AltaPayApi/bin/${build.configuration}/" includes="*.dll" />
+            <fileset dir="AltaPayApi/AltaPayApi/bin/${build.configuration}/" includes="*.xml" />
+        </copy>
+
+        <copy todir="${tmp}/source">
+            <fileset dir="AltaPayApi/" includes="**/*.cs" />
+            <fileset dir="AltaPayApi/" includes="**/*.csproj" />
+            <fileset dir="AltaPayApi/" includes="**/*.sln" />
+            <fileset dir="AltaPayApi/" includes="**/*.dll" />
+            <fileset dir="AltaPayApi/" includes="**/*.xml" />
+            <fileset dir="AltaPayApi/" includes="**/*.nunit" />
+            <fileset dir="AltaPayApi/" includes="**/*.csv" />
+        </copy>
+
+        <zip destfile="dist/${ant.project.name}_${pensio.release}_${pensio.revision}.zip">
+            <fileset dir="${tmp}">
+            </fileset>
+        </zip>
+
+        <delete dir="${tmp}" />
+    </target>
+
+    <target name="UnitTests" depends="CompileDebug">
+<!--
+            apt-get install nunit-console
+-->
+        <exec executable="/usr/bin/cli" failonerror="true">
+            <!-- when running under Linux leave it commented out... -->
+            <!-- <arg value="- -runtime=v4.0" /> -->
+            <arg value="/usr/lib/nunit/nunit-console.exe" />
+            <arg value="AltaPayApi/AltaPayApi.Tests/bin/Debug/AltaPayApi.Tests.dll" />
+            <arg value="-run=AltaPay.Service.Tests.Unit" />
+        </exec>
+    </target>
+
+    <target name="IntegrationTests" depends="CompileDebug">
+        <exec executable="/usr/bin/cli" failonerror="true">
+            <!-- when running under Linux leave it commented out... -->
+            <!-- <arg value="- -runtime=v4.0" /> -->
+            <arg value="/usr/lib/nunit/nunit-console.exe" />
+            <arg value="AltaPayApi/AltaPayApi.Tests/bin/Debug/AltaPayApi.Tests.dll" />
+            <!-- if want to run one test -->
+            <!-- <arg value="-run=AltaPay.Service.Tests.Integration.MerchantApiTests.CreditWithCardData" /> -->
+            <arg value="-run=AltaPay.Service.Tests.Integration" />
+        </exec>
+    </target>
+
+</project>

@@ -1,0 +1,7 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Debug" />
+  <Config name="debug" binpathtype="Auto">
+    <assembly path="AltaPayApi.Tests/bin/Release/AltaPayApi.Tests.dll" />
+  </Config>
+  <Config name="Release" binpathtype="Auto" />
+</NUnitProject>
