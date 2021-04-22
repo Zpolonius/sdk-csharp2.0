@@ -82,14 +82,14 @@ using System.Reflection;
     </target>
 
     <target name="Compile" depends="ClearBuilds">
-        <exec executable="xbuild" failonerror="true">
+        <exec executable="msbuild" failonerror="true">
             <arg value="/p:Configuration=${build.configuration}" />
             <arg value="AltaPayApi/AltaPayApi.sln" />
         </exec>
     </target>
 
     <target name="CompileDebug" depends="ClearBuilds">
-        <exec executable="xbuild" failonerror="true">
+        <exec executable="msbuild" failonerror="true">
             <arg value="/p:Configuration=Debug" />
             <arg value="AltaPayApi/AltaPayApi.sln" />
         </exec>
@@ -116,6 +116,8 @@ using System.Reflection;
             <fileset dir="AltaPayApi/" includes="**/*.xml" />
             <fileset dir="AltaPayApi/" includes="**/*.nunit" />
             <fileset dir="AltaPayApi/" includes="**/*.csv" />
+            <fileset dir="AltaPayApi/" includes="**/*.props" />
+            <fileset dir="AltaPayApi/" includes="**/*.config" />
         </copy>
 
         <zip destfile="dist/${ant.project.name}_${GitLastTag}.zip">
@@ -141,6 +143,8 @@ using System.Reflection;
             <fileset dir="AltaPayApi/" includes="**/*.xml" />
             <fileset dir="AltaPayApi/" includes="**/*.nunit" />
             <fileset dir="AltaPayApi/" includes="**/*.csv" />
+            <fileset dir="AltaPayApi/" includes="**/*.props" />
+            <fileset dir="AltaPayApi/" includes="**/*.config" />
         </copy>
 
         <zip destfile="dist/${ant.project.name}_${pensio.release}_${pensio.revision}.zip">
