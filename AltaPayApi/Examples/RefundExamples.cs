@@ -126,6 +126,7 @@ namespace Examples
                     UnitPrice = 120,
                     Discount = 0.00,
                     GoodsType = GoodsType.Item,
+                    ProductUrl = "product/path/product.html",
                 }
             };
 

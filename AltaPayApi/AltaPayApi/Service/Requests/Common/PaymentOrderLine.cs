@@ -19,8 +19,8 @@ namespace AltaPay.Service
 		public double Discount { get; set; }
 		public GoodsType GoodsType { get; set; }
 		public string ImageUrl { get; set; }
-		
-		
+		public string ProductUrl { get; set; }
+
 		public double TaxPercent
 		{
 			get

@@ -178,6 +178,7 @@ namespace AltaPay.Service
 				orderLineParam.Add("discount", orderLine.Discount);
 				orderLineParam.Add("goodsType", orderLine.GoodsType.ToString().ToLower());
 				orderLineParam.Add("imageUrl", orderLine.ImageUrl);
+				orderLineParam.Add("productUrl", orderLine.ProductUrl);
 
 				orderLinesParam.Add(lineNumber.ToString(), orderLineParam);
 				lineNumber++;
