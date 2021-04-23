@@ -257,7 +257,7 @@ namespace AltaPay.Service.Tests.Integration
 
                 // Customer Data
                 CustomerInfo = {
-                    Email = "testValitor@impact.dk",
+                    Email = "testAltapay@impact.dk",
                     CustomerPhone = "73577357",
                     BirthDate = DateTime.Now,
 

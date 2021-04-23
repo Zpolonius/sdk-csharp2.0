@@ -43,7 +43,7 @@
                 <UpdatedDate>2016-06-15 04:16:32</UpdatedDate>
                 <PaymentNature>CreditCard</PaymentNature>
                 <PaymentSchemeName>MasterCard</PaymentSchemeName>
-                <PaymentNatureService name="ValitorAcquirer">
+                <PaymentNatureService name="SoapTestAcquirer">
                     <SupportsRefunds>true</SupportsRefunds>
                     <SupportsRelease>true</SupportsRelease>
                     <SupportsMultipleCaptures>true</SupportsMultipleCaptures>
