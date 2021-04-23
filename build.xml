@@ -31,21 +31,6 @@ using System.Reflection;
     </target>
     <!--  Tag section ends here   -->
 
-    <target name="pensio.revision" description="Store git revision in ${pensio.revision}">
-        <exec executable="git" outputproperty="pensio.revision" failifexecutionfails="true" errorproperty="">
-            <arg value="describe"/>
-            <arg value="--tags"/>
-            <arg value="--always"/>
-            <arg value="HEAD"/>
-        </exec>
-        <condition property="repository.version" value="${git.revision}" else="unknown">
-            <and>
-                <isset property="git.revision"/>
-                <length string="${git.revision}" trim="yes" length="0" when="greater"/>
-            </and>
-        </condition>
-    </target>
-
     <target name="ClearBuilds">
         <delete includeEmptyDirs="true">
             <fileset dir="AltaPayApi" includes="**/bin/**" />
@@ -99,7 +84,7 @@ using System.Reflection;
         <delete dir="${tmp}" />
     </target>
 
-    <target name="Build" depends="pensio.revision,Compile,EnsureTmp">
+    <target name="Build" depends="Compile,EnsureTmp">
 
         <copy todir="${tmp}/">
             <fileset dir="AltaPayApi/AltaPayApi/bin/${build.configuration}/" includes="*.dll" />
@@ -118,7 +103,7 @@ using System.Reflection;
             <fileset dir="AltaPayApi/" includes="**/*.config" />
         </copy>
 
-        <zip destfile="dist/${ant.project.name}_${pensio.revision}.zip">
+        <zip destfile="dist/${ant.project.name}.zip">
             <fileset dir="${tmp}">
             </fileset>
         </zip>
