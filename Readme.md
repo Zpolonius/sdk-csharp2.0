@@ -3,6 +3,12 @@ https://gitlab.com/altapay/aux/csharpsdk
 
 C_Sharp is a Client library that is used as a bridge between customer .Net solutions and Altapay gateway.
 
+## Change Log
+
+### 1.0.0
+
+- Supports API changes from 20210324
+
 ## Installing C_Sharp
 
 ## Other pre-requisites
