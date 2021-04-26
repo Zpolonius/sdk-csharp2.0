@@ -1,10 +1,31 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>AltaPayApi</AssemblyName>
-    <RootNamespace>AltaPay</RootNamespace>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <TargetFramework>netstandard2.0</TargetFramework>
+	  <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+	  <Title>Altapay - API C_Sharp</Title>
+	  <AssemblyName>AltaPayApi</AssemblyName>
+	  <RootNamespace>AltaPay</RootNamespace>
+	  <Description>C_Sharp is a Client library that is used as a bridge between customer .Net solutions and Altapay gateway.</Description>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <Copyright>Copyright (c) 2016 Martin Aarhof </Copyright>
+	  <RepositoryUrl>https://github.com/AltaPay/sdk-csharp2.0</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>bin\Debug\</OutputPath>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
