@@ -17,10 +17,11 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
+    - uses: actions/checkout@v2 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore  AltaPayApi/AltaPayApi.Tests/AltaPayApi.Tests.csproj
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build AltaPayApi/AltaPayApi.Tests/AltaPayApi.Tests.csproj --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test AltaPayApi/AltaPayApi.Tests/AltaPayApi.Tests.csproj --no-build --verbosity normal
 
