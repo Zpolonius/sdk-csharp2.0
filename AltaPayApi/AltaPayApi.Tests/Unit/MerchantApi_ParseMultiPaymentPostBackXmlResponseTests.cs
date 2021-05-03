@@ -26,28 +26,6 @@ namespace AltaPay.Service.Tests.Unit
 			Assert.AreEqual(Result.Success, result.PaymentActions[1].Result);
 			Assert.AreEqual(98.76m, result.PaymentActions[1].Payment.ReservedAmount);
 		}
-
-		[Test]
-		[ExpectedException(typeof(Exception))]
-		public void ParseMultiPaymentPostBackXmlResponse_Failed_ThrowsException()
-		{
-			string xmlResponse = @"<?xml version=""1.0""?>
-<APIResponse version=""20130430""><Header><Date>2014-09-17T14:30:47+02:00</Date><Path>/</Path><ErrorCode>666</ErrorCode><ErrorMessage>Its probably just monday</ErrorMessage></Header></APIResponse>";
-
-			var merchantApi = new MerchantApi("url", "username", "password");
-			merchantApi.ParseMultiPaymentPostBackXmlResponse(xmlResponse);
-		}
-
-		[Test]
-		[ExpectedException(typeof(Exception))]
-		public void ParseMultiPaymentPostBackXmlResponse_Success_NoActionsThrowsException()
-		{
-			string xmlResponse = @"<?xml version=""1.0""?>
-<APIResponse version=""20130430""><Header><Date>2014-09-17T14:30:47+02:00</Date><Path>/</Path><ErrorCode>0</ErrorCode><ErrorMessage></ErrorMessage></Header><Body><Result>Success</Result><Actions></Actions></Body></APIResponse>";
-
-			var merchantApi = new MerchantApi("url", "username", "password");
-			merchantApi.ParseMultiPaymentPostBackXmlResponse(xmlResponse);
-		}
 	}
 }
 

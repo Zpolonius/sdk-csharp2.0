@@ -20,7 +20,7 @@ namespace AltaPay.Service.Tests.Unit
 
 			Mock<FundingContentResult> mock = new Mock<FundingContentResult>(null, null);
 
-			mock.Setup(t => t.GetFundingContent()).Returns(File.ReadAllText("Unit/txt/Funding1.csv"));
+			mock.Setup(t => t.GetFundingContent()).Returns(File.ReadAllText("AltaPayApi.Tests/Unit/txt/Funding1.csv"));
 
 			List<FundingRecord> list = mock.Object.GetFundingRecordList();
 
@@ -70,7 +70,7 @@ namespace AltaPay.Service.Tests.Unit
 
 			Mock<FundingContentResult> mock = new Mock<FundingContentResult>(null, null);
 
-			mock.Setup(t => t.GetFundingContent()).Returns(File.ReadAllText("Unit/txt/Funding42221.csv"));
+			mock.Setup(t => t.GetFundingContent()).Returns(File.ReadAllText("AltaPayApi.Tests/Unit/txt/Funding42221.csv"));
 
 			List<FundingRecord> list = mock.Object.GetFundingRecordList();
 

@@ -56,21 +56,6 @@ namespace AltaPay.Service.Tests.Unit
             NUnit.Framework.Assert.AreEqual(Result.Cancelled, actual.Result);
             NUnit.Framework.Assert.AreEqual("epayment_cancelled", pr.Payment.TransactionStatus);
 		}
-	
-		
-		[Test]
-		[ExpectedException(typeof(Exception))]
-		public void ParsePostBackXmlResponse_InvalidXml()
-		{
-            var logFileName = Path.GetTempPath() + "skarptests.log";
-			var logger = new FileAltaPayLogger(logFileName);
-			logger.LogLevel = AltaPayLogLevel.Error;
-			
-			string xmlResponse = @"<?xml version=""1.0""?><APIResponse version=""20130430""><NotValid>Not even a little bit</NotValid></APIResponse>";
-			
-			var merchantApi = new MerchantApi("url", "username", "password", logger);
-			merchantApi.ParsePostBackXmlResponse(xmlResponse);
-		}
 
 		[Test]
 		public void ParsePostBackXmlResponse_ErrorResponseWithoutTransactions()
@@ -94,7 +79,7 @@ namespace AltaPay.Service.Tests.Unit
             var logger = new FileAltaPayLogger(logFileName);
 			logger.LogLevel = AltaPayLogLevel.Error;
 
-			string xmlResponse = File.ReadAllText("Unit/txt/ChargebackEvent.xml");
+			string xmlResponse = File.ReadAllText("AltaPayApi.Tests/Unit/txt/ChargebackEvent.xml");
 
 			var merchantApi = new MerchantApi("url", "username", "password", logger);
 			ApiResult actual = merchantApi.ParsePostBackXmlResponse(xmlResponse);
