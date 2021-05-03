@@ -79,7 +79,7 @@ namespace AltaPay.Service.Tests.Unit
             var logger = new FileAltaPayLogger(logFileName);
 			logger.LogLevel = AltaPayLogLevel.Error;
 
-			string xmlResponse = File.ReadAllText(@"AltaPayApi.Tests/Unit/txt/ChargebackEvent.xml");
+			string xmlResponse = File.ReadAllText(@"AltaPayApi/AltaPayApi.Tests/Unit/txt/ChargebackEvent.xml");
 
 			var merchantApi = new MerchantApi("url", "username", "password", logger);
 			ApiResult actual = merchantApi.ParsePostBackXmlResponse(xmlResponse);
