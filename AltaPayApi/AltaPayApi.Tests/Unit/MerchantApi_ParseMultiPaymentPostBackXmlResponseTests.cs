@@ -1,6 +1,8 @@
 using System;
 using NUnit.Framework;
 using AltaPay.Api.Tests;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Assert = NUnit.Framework.Assert;
 
 namespace AltaPay.Service.Tests.Unit
 {
@@ -14,37 +16,15 @@ namespace AltaPay.Service.Tests.Unit
 			
 			var merchantApi = new MerchantApi("url", "username", "password");
 			MultiPaymentApiResult result = merchantApi.ParseMultiPaymentPostBackXmlResponse(xmlResponse);
-			
-			Assert.AreEqual(false, result.HasAnyFailedPaymentActions());
-			Assert.AreEqual(2, result.PaymentActions.Count);
+
+            Assert.AreEqual(false, result.HasAnyFailedPaymentActions());
+            Assert.AreEqual(2, result.PaymentActions.Count);
 			
 			Assert.AreEqual(Result.Success, result.PaymentActions[0].Result);
 			Assert.AreEqual(12.34m, result.PaymentActions[0].Payment.ReservedAmount);
 			
 			Assert.AreEqual(Result.Success, result.PaymentActions[1].Result);
 			Assert.AreEqual(98.76m, result.PaymentActions[1].Payment.ReservedAmount);
-		}
-
-		[Test]
-		[ExpectedException(typeof(Exception))]
-		public void ParseMultiPaymentPostBackXmlResponse_Failed_ThrowsException()
-		{
-			string xmlResponse = @"<?xml version=""1.0""?>
-<APIResponse version=""20130430""><Header><Date>2014-09-17T14:30:47+02:00</Date><Path>/</Path><ErrorCode>666</ErrorCode><ErrorMessage>Its probably just monday</ErrorMessage></Header></APIResponse>";
-
-			var merchantApi = new MerchantApi("url", "username", "password");
-			merchantApi.ParseMultiPaymentPostBackXmlResponse(xmlResponse);
-		}
-
-		[Test]
-		[ExpectedException(typeof(Exception))]
-		public void ParseMultiPaymentPostBackXmlResponse_Success_NoActionsThrowsException()
-		{
-			string xmlResponse = @"<?xml version=""1.0""?>
-<APIResponse version=""20130430""><Header><Date>2014-09-17T14:30:47+02:00</Date><Path>/</Path><ErrorCode>0</ErrorCode><ErrorMessage></ErrorMessage></Header><Body><Result>Success</Result><Actions></Actions></Body></APIResponse>";
-
-			var merchantApi = new MerchantApi("url", "username", "password");
-			merchantApi.ParseMultiPaymentPostBackXmlResponse(xmlResponse);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-<project name="ValitorOmniCSharpSDK" default="Build">
+<project name="AltapayCSharpSDK" default="Build">
 
     <property name="build.configuration" value="Release" />
     <property name="tmp" value="_tmp" />
@@ -31,50 +31,6 @@ using System.Reflection;
     </target>
     <!--  Tag section ends here   -->
 
-    <target name="pensio.revision" description="Store git revision in ${pensio.revision}">
-        <exec executable="git" outputproperty="pensio.revision" failifexecutionfails="true" errorproperty="">
-            <arg value="describe"/>
-            <arg value="--tags"/>
-            <arg value="--always"/>
-            <arg value="HEAD"/>
-        </exec>
-        <condition property="repository.version" value="${git.revision}" else="unknown">
-            <and>
-                <isset property="git.revision"/>
-                <length string="${git.revision}" trim="yes" length="0" when="greater"/>
-            </and>
-        </condition>
-    </target>
-
-    <target name="pensio.release">
-        <exec executable="git" outputProperty="git.lastcommitdate.ci" failifexecutionfails="true">
-            <arg value="log" />
-            <arg value="-1" />
-            <arg value="--format=%ci" />
-        </exec>
-
-        <exec executable="date" outputProperty="pensio.release" failifexecutionfails="true">
-            <arg value="+%Y%m%d_%H%M%S" />
-            <arg value="-d" />
-            <arg value="${git.lastcommitdate.ci}" />
-        </exec>
-
-        <exec executable="date" outputProperty="pensio.version" failifexecutionfails="true">
-            <arg value="+%Y.%m.%d.%H%M" />
-            <arg value="-d" />
-            <arg value="${git.lastcommitdate.ci}" />
-        </exec>
-    </target>
-
-
-    <target name="SetAltaPayVersion" depends="pensio.release">
-        <echo file="AltaPayApi/AltaPayApi/Properties/SdkVersion.cs">
-using System;
-using System.Reflection;
-[assembly: AssemblyVersion("${pensio.version}")]
-[assembly: AssemblyFileVersion("${pensio.version}")]</echo>
-    </target>
-
     <target name="ClearBuilds">
         <delete includeEmptyDirs="true">
             <fileset dir="AltaPayApi" includes="**/bin/**" />
@@ -82,14 +38,14 @@ using System.Reflection;
     </target>
 
     <target name="Compile" depends="ClearBuilds">
-        <exec executable="xbuild" failonerror="true">
+        <exec executable="msbuild" failonerror="true">
             <arg value="/p:Configuration=${build.configuration}" />
             <arg value="AltaPayApi/AltaPayApi.sln" />
         </exec>
     </target>
 
     <target name="CompileDebug" depends="ClearBuilds">
-        <exec executable="xbuild" failonerror="true">
+        <exec executable="msbuild" failonerror="true">
             <arg value="/p:Configuration=Debug" />
             <arg value="AltaPayApi/AltaPayApi.sln" />
         </exec>
@@ -116,6 +72,8 @@ using System.Reflection;
             <fileset dir="AltaPayApi/" includes="**/*.xml" />
             <fileset dir="AltaPayApi/" includes="**/*.nunit" />
             <fileset dir="AltaPayApi/" includes="**/*.csv" />
+            <fileset dir="AltaPayApi/" includes="**/*.props" />
+            <fileset dir="AltaPayApi/" includes="**/*.config" />
         </copy>
 
         <zip destfile="dist/${ant.project.name}_${GitLastTag}.zip">
@@ -126,7 +84,7 @@ using System.Reflection;
         <delete dir="${tmp}" />
     </target>
 
-    <target name="Build" depends="SetAltaPayVersion,pensio.release,pensio.revision,Compile,EnsureTmp">
+    <target name="Build" depends="Compile,EnsureTmp">
 
         <copy todir="${tmp}/">
             <fileset dir="AltaPayApi/AltaPayApi/bin/${build.configuration}/" includes="*.dll" />
@@ -141,9 +99,11 @@ using System.Reflection;
             <fileset dir="AltaPayApi/" includes="**/*.xml" />
             <fileset dir="AltaPayApi/" includes="**/*.nunit" />
             <fileset dir="AltaPayApi/" includes="**/*.csv" />
+            <fileset dir="AltaPayApi/" includes="**/*.props" />
+            <fileset dir="AltaPayApi/" includes="**/*.config" />
         </copy>
 
-        <zip destfile="dist/${ant.project.name}_${pensio.release}_${pensio.revision}.zip">
+        <zip destfile="dist/${ant.project.name}.zip">
             <fileset dir="${tmp}">
             </fileset>
         </zip>

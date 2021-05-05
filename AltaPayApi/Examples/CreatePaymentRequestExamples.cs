@@ -138,6 +138,7 @@ namespace Examples
                     UnitPrice = 500,
                     Discount = 0.00,
                     GoodsType = GoodsType.Item,
+                    ProductUrl = "product/path/product.html",
                 }
             };
 

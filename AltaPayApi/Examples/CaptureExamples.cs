@@ -124,6 +124,7 @@ namespace Examples
                     UnitPrice = 120,
                     Discount = 0.00,
                     GoodsType = GoodsType.Item,
+                    ProductUrl = "product/path/product.html",
                 }
             };
             //initialize capture request class, this class is used for forwarding all the data needed for capture request

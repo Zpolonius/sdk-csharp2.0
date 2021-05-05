@@ -1,133 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> -->
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{908048BE-E5D0-4719-9E5D-E1BEDB6AB31E}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AltaPay</RootNamespace>
-    <AssemblyName>AltaPayApi</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <!-- <TargetFrameworkVersion>v4.5</TargetFrameworkVersion> -->
-    <FileAlignment>512</FileAlignment>
-    <SignAssembly>false</SignAssembly>
+	  <TargetFramework>netstandard2.0</TargetFramework>
+	  <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+	  <Title>Altapay - API C_Sharp</Title>
+	  <AssemblyName>AltaPayApi</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+	  <RootNamespace>AltaPay</RootNamespace>
+	  <Description>For accessing Altapay payment gateway through the API</Description>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <Copyright>Copyright (c) 2021</Copyright>
+	  <RepositoryUrl>https://github.com/AltaPay/sdk-csharp2.0</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+	  <PackageTags>1.0.0</PackageTags>
+	  <PackageReleaseNotes>- Supports API changes from 20210324</PackageReleaseNotes>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
     <OutputPath>bin\Debug\</OutputPath>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Web" />
-    <Reference Include="mscorlib" />
-    <Reference Include="LumenWorks.Framework.IO">
-      <HintPath>..\packages\LumenWorksCsvReader.3.9.1\lib\net20\LumenWorks.Framework.IO.dll</HintPath>
-    </Reference>
+    <Compile Remove="Service\PaymentApiResponse.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="Service\MerchantApi.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\IMerchantApi.cs" />
-    <Compile Include="Generated\APIResponse.cs" />
-    <Compile Include="Service\Helpers\ParameterHelper.cs" />
-    <Compile Include="Service\Requests\Common\AccountOffer.cs" />
-    <Compile Include="Service\Requests\Common\Amount.cs" />
-    <Compile Include="Service\Requests\Common\AuthType.cs" />
-    <Compile Include="Service\Requests\Common\CreditCard.cs" />
-    <Compile Include="Service\Requests\Common\Currency.cs" />
-    <Compile Include="Service\Requests\Common\CustomerAddress.cs" />
-    <Compile Include="Service\Requests\Common\CardHolderData.cs" />
-    <Compile Include="Service\Requests\Common\CustomerInfo.cs" />
-    <Compile Include="Service\Requests\Common\FraudService.cs" />
-    <Compile Include="Service\Requests\Common\GoodsType.cs" />
-    <Compile Include="Service\Requests\Common\PaymentOrderLine.cs" />
-    <Compile Include="Service\Requests\Common\PaymentRequestConfig.cs" />
-    <Compile Include="Service\Requests\Common\PaymentSource.cs" />
-    <Compile Include="Service\Requests\Common\ShippingType.cs" />
-    <Compile Include="Service\Requests\UpdateOrderRequest.cs" />
-    <Compile Include="Service\Results\ApiResult.cs" />
-    <Compile Include="Service\Results\CaptureResult.cs" />
-    <Compile Include="Service\Results\ChargeSubscriptionResult.cs" />
-    <Compile Include="Service\Results\Common\Result.cs" />
-    <Compile Include="Service\Results\FundingsResult.cs" />
-    <Compile Include="Service\Results\GetPaymentResult.cs" />
-    <Compile Include="Service\Results\PaymentRequestResult.cs" />
-    <Compile Include="Service\Results\PaymentResult.cs" />
-    <Compile Include="Service\Results\RefundResult.cs" />
-    <Compile Include="Service\Results\ReleaseResult.cs" />
-    <Compile Include="Service\Results\ReservationResult.cs" />
-    <Compile Include="Service\Results\ReserveSubscriptionChargeResult.cs" />
-    <Compile Include="Service\Results\SubscriptionResult.cs" />
-    <Compile Include="Service\Requests\CaptureRequest.cs" />
-    <Compile Include="Service\Requests\ChargeSubscriptionRequest.cs" />
-    <Compile Include="Service\Requests\GetFundingsRequest.cs" />
-    <Compile Include="Service\Requests\GetPaymentRequest.cs" />
-    <Compile Include="Service\Requests\RefundRequest.cs" />
-    <Compile Include="Service\Requests\ReleaseRequest.cs" />
-    <Compile Include="Service\Requests\ReserveRequest.cs" />
-    <Compile Include="Service\Requests\ReserveSubscriptionChargeRequest.cs" />
-    <Compile Include="Service\Requests\GetPaymentsRequest.cs" />
-    <Compile Include="Service\Results\GetPaymentsResult.cs" />
-    <Compile Include="Service\Globalisation.cs" />
-    <Compile Include="Service\Requests\Common\PaymentRequestRequest.cs" />
-    <Compile Include="Service\Requests\Common\MultiPaymentRequestRequest.cs" />
-    <Compile Include="Service\Requests\Common\MultiPaymentRequestRequestChild.cs" />
-    <Compile Include="Service\Requests\Common\BasePaymentRequestRequest.cs" />
-    <Compile Include="Service\Results\MultiPaymentRequestResult.cs" />
-    <Compile Include="Service\Results\MultiPaymentApiResult.cs" />
-    <Compile Include="Service\Results\Common\PaymentAction.cs" />
-    <Compile Include="Service\IAltaPayLogger.cs" />
-    <Compile Include="Service\Loggers\BlackholeAltaPayLogger.cs" />
-    <Compile Include="Service\AltaPayLogLevel.cs" />
-    <Compile Include="Service\Loggers\FileAltaPayLogger.cs" />
-    <Compile Include="Properties\SdkVersion.cs" />
-    <Compile Include="Service\Results\FundingContentResult.cs" />
-    <Compile Include="Service\Requests\Common\InvoiceReservationRequest.cs" />
-    <Compile Include="Service\Results\InvoiceReservationResult.cs" />
-    <Compile Include="Service\Results\FundingRecord.cs" />
-    <Compile Include="Service\Results\UpdateOrderResult.cs" />
-    <Compile Include="Service\Requests\CreditRequest.cs" />
-    <Compile Include="Service\Results\CreditResult.cs" />
+    <PackageReference Include="LumenWorksCsvReader" Version="4.0.0" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <ItemGroup>
-    <Folder Include="Generated\" />
-    <Folder Include="Service\Loggers\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
+
 </Project>
