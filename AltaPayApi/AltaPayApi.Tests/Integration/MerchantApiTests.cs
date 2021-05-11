@@ -384,7 +384,7 @@ namespace AltaPay.Service.Tests.Integration
 
             IDictionary <string, object> TransactionInfo = new Dictionary<string, object>();
             TransactionInfo.Add("sdkName", "c sharp");
-            TransactionInfo.Add("sdkVersion","1.1.0");
+            TransactionInfo.Add("sdkVersion","1.0.0");
 
             var request = new CreditRequest
             {
