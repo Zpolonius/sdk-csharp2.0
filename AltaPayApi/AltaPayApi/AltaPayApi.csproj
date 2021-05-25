@@ -3,20 +3,18 @@
   <PropertyGroup>
 	  <TargetFramework>netstandard2.0</TargetFramework>
 	  <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-	  <Title>Altapay - API C_Sharp</Title>
-	  <AssemblyName>AltaPayApi</AssemblyName>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-	  <RootNamespace>AltaPay</RootNamespace>
 	  <Description>For accessing Altapay payment gateway through the API</Description>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <Copyright>Copyright (c) 2021</Copyright>
 	  <RepositoryUrl>https://github.com/AltaPay/sdk-csharp2.0</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
-	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-	  <PackageTags>1.0.0</PackageTags>
 	  <PackageReleaseNotes>- Supports API changes from 20210324</PackageReleaseNotes>
+	  <AssemblyVersion>1.0.0.0</AssemblyVersion>
+	  <FileVersion>1.0.0.0</FileVersion>
+	  <Authors>AltaPay</Authors>
+	  <Product>Altapay - API C_Sharp</Product>
+	  <PackageTags>1.0.0</PackageTags>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
