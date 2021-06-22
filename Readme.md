@@ -7,17 +7,27 @@ Note: To build this project upgrade to .NetFramework 4.6.1 or greater. If the ta
 
 ### Build package
 
-1- Clone a repository 
+To build/package the C_Sharp you also need a number of build-tools.
 
-    $ git clone https://github.com/AltaPay/sdk-csharp2.0.git
+Details about installing Mono can be found at http://www.mono-project.com/download/.
 
-2- Open Visual Studio 2019 and go to File → Open → Project/Solution.
+Below can be seen what had to be done in order to have a complete mono instalation on Ubuntu 16.04.
 
-3- Select the .sln file located in the Altapay directory.
+    $ sudo apt install gnupg ca-certificates
+    $ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+        echo "deb https://download.mono-project.com/repo/ubuntu stable-bionic main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+    $ sudo apt update
 
-4- Right-click on the solution file and click Build Solution to build the package.
+  The package mono-devel should be installed to compile code.
+    $ sudo apt install mono-devel
 
-![Download](docs/build-project.png)
+  then (the complete installation of the library - for avoiding the "assembly not found" cases)
+     
+    $ sudo apt install mono-complete
+    
+ and finally:   
+    
+    $ sudo apt install ant
 
 ### 1.0.0
 
