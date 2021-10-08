@@ -6,7 +6,6 @@
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 Vagrant.configure("2") do |config|
-  # config.vm.synced_folder ".", "C:/Users/IEUser", type: "virtualbox"
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
@@ -17,6 +16,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_version = "1"
   config.ssh.username = 'IEUser'
   config.ssh.password = 'Passw0rd!'
+  config.ssh.insert_key = false
   config.ssh.keys_only = false
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -66,6 +66,5 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-  SHELL
+  #config.vm.provision :shell, path: "./provision.sh", run: 'always'
 end

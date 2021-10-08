@@ -6,5 +6,5 @@ dist
 *test-results/
 *obj/
 *.suo
-
+.idea/
 .idea/workspace.xml
