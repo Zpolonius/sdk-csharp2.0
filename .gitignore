@@ -8,3 +8,6 @@ dist
 *.suo
 .idea/
 .idea/workspace.xml
+.vagrant/
+*.box
+*.zip
