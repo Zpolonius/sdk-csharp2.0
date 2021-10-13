@@ -11,3 +11,4 @@ dist
 .vagrant/
 *.box
 *.zip
+*.log

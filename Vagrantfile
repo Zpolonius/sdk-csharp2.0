@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "maf/test"
+  config.vm.box = "altapay/sdk-csharp2.0"
   config.vm.box_version = "1"
   config.ssh.username = 'IEUser'
   config.ssh.password = 'Passw0rd!'
@@ -53,7 +53,7 @@ Vagrant.configure("2") do |config|
   #
   config.vm.provider "virtualbox" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
-    vb.gui = true
+    vb.gui = false
     vb.customize ["modifyvm", :id, "--vram", "27"]
   #
   #   # Customize the amount of memory on the VM:
