@@ -11,6 +11,14 @@ namespace AltaPay.Service
 		public Amount Amount { get; set; }
 		public AuthType PaymentType { get; set; }
 
+		public AgreementType? AgreementType { get; set; }
+		public string AgreementId { get; set; }
+		public AgreementUnscheduledType? AgreementUnscheduledType { get; set; }
+		public string AgreementExpiry { get; set; }
+		public string AgreementFrequency { get; set; }
+		public string AgreementNextChargeDate { get; set; }
+		public string AgreementAdminUrl { get; set; }
+
 		public string CreditCardToken { get; set;}		// Option1 : Creditcard Token
 
 		public string Pan { get; set;} 					// Option2 : Pan, Month, Year
