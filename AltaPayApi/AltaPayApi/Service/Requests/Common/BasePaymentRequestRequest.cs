@@ -20,7 +20,6 @@ namespace AltaPay.Service
 		public string Language { get; set; }
 		public IDictionary<string,object> PaymentInfos { get; set; }
 		public AuthType Type { get; set; }
-
 		public AgreementType? AgreementType { get; set; }
 		public string AgreementId { get; set; }
 		public AgreementUnscheduledType? AgreementUnscheduledType { get; set; }
@@ -28,7 +27,6 @@ namespace AltaPay.Service
 		public string AgreementFrequency { get; set; }
 		public string AgreementNextChargeDate { get; set; }
 		public string AgreementAdminUrl { get; set; }
-
 		public string CreditCardToken { get; set; }
 		public string Cookie { get; set; }
 		public PaymentRequestConfig Config { get; set; }

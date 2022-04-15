@@ -10,7 +10,6 @@ namespace AltaPay.Service
 		public string ShopOrderId {get; set;}
 		public Amount Amount { get; set; }
 		public AuthType PaymentType { get; set; }
-
 		public AgreementType? AgreementType { get; set; }
 		public string AgreementId { get; set; }
 		public AgreementUnscheduledType? AgreementUnscheduledType { get; set; }
