@@ -277,9 +277,9 @@ namespace AltaPay.Service
 		public ChargeSubscriptionResult ChargeSubscription(ChargeSubscriptionRequest request)
 		{
 			Dictionary<string,Object> parameters = new Dictionary<string, Object>();
-			if (request.AgreementId!=null){
+			if (request.AgreementId!=null) {
 				parameters.Add("agreement[id]", request.AgreementId);
-			}else{
+			} else {
 				parameters.Add("transaction_id", request.SubscriptionId);
 			}
 			parameters.Add("amount", request.Amount.GetAmountString());
@@ -291,9 +291,9 @@ namespace AltaPay.Service
 		public ReserveSubscriptionChargeResult ReserveSubscriptionCharge(ReserveSubscriptionChargeRequest request)
 		{
 			Dictionary<string,Object> parameters = new Dictionary<string, Object>();
-			if (request.AgreementId!=null){
+			if (request.AgreementId!=null) {
 				parameters.Add("agreement[id]", request.AgreementId);
-			}else{
+			} else {
 				parameters.Add("transaction_id", request.SubscriptionId);
 			}
 			parameters.Add("amount", request.Amount.GetAmountString());
