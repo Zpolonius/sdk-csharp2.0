@@ -17,7 +17,7 @@ namespace AltaPay.Service
 		public Dictionary<string,Object> ToDictionary()
 		{
 			Dictionary<string,Object> agreementParams = new Dictionary<string,Object>();
-            agreementParams.Add("id", AgreementId);
+			agreementParams.Add("id", AgreementId);
 			agreementParams.Add("type", AgreementType);
 			agreementParams.Add("unscheduled", AgreementUnscheduledType);
 			agreementParams.Add("expiry", AgreementExpiry);

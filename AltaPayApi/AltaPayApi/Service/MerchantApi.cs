@@ -71,10 +71,10 @@ namespace AltaPay.Service
 
 			parameters.Add("fraud_service", request.FraudService.ToString().ToLower());
 
-            // Agreement parameters
-            if (request.AgreementConfig != null){
-                parameters.Add("agreement", request.AgreementConfig.ToDictionary());
-            }
+			// Agreement parameters
+			if (request.AgreementConfig != null){
+				parameters.Add("agreement", request.AgreementConfig.ToDictionary());
+			}
 
 			// Order lines
 			parameters = getOrderLines(parameters, request.OrderLines);
@@ -112,10 +112,10 @@ namespace AltaPay.Service
 
 			parameters.Add("fraud_service", request.FraudService.ToString().ToLower());
 
-            // Agreement parameters
-            if (request.AgreementConfig != null){
-                parameters.Add("agreement", request.AgreementConfig.ToDictionary());
-            }
+			// Agreement parameters
+			if (request.AgreementConfig != null){
+				parameters.Add("agreement", request.AgreementConfig.ToDictionary());
+			}
 
 			// Order lines
 			parameters = getOrderLines(parameters, request.OrderLines);
@@ -348,10 +348,10 @@ namespace AltaPay.Service
 			parameters.Add("cookie", request.Cookie);
 			parameters.Add("fraud_service", request.FraudService.ToString().ToLower());
 
-            // Agreement parameters
-            if (request.AgreementConfig != null){
-                parameters.Add("agreement", request.AgreementConfig.ToDictionary());
-            }
+			// Agreement parameters
+			if (request.AgreementConfig != null){
+				parameters.Add("agreement", request.AgreementConfig.ToDictionary());
+			}
 
 			return parameters;
 		}
