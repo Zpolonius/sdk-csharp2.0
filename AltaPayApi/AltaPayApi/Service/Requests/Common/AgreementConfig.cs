@@ -6,13 +6,13 @@ namespace AltaPay.Service
 {
 	public class AgreementConfig
 	{
-        public AgreementType? AgreementType { get; set; }
-        public string AgreementId { get; set; }
-        public AgreementUnscheduledType? AgreementUnscheduledType { get; set; }
-        public string AgreementExpiry { get; set; }
-        public string AgreementFrequency { get; set; }
-        public string AgreementNextChargeDate { get; set; }
-        public string AgreementAdminUrl { get; set; }
+		public AgreementType? AgreementType { get; set; }
+		public string AgreementId { get; set; }
+		public AgreementUnscheduledType? AgreementUnscheduledType { get; set; }
+		public string AgreementExpiry { get; set; }
+		public string AgreementFrequency { get; set; }
+		public string AgreementNextChargeDate { get; set; }
+		public string AgreementAdminUrl { get; set; }
 		
 		public Dictionary<string,Object> ToDictionary()
 		{
