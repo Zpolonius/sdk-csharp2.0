@@ -10,13 +10,6 @@ namespace AltaPay.Service
 		public string ShopOrderId {get; set;}
 		public Amount Amount { get; set; }
 		public AuthType PaymentType { get; set; }
-		public AgreementType? AgreementType { get; set; }
-		public string AgreementId { get; set; }
-		public AgreementUnscheduledType? AgreementUnscheduledType { get; set; }
-		public string AgreementExpiry { get; set; }
-		public string AgreementFrequency { get; set; }
-		public string AgreementNextChargeDate { get; set; }
-		public string AgreementAdminUrl { get; set; }
 
 		public string CreditCardToken { get; set;}		// Option1 : Creditcard Token
 
@@ -35,6 +28,7 @@ namespace AltaPay.Service
 		public FraudService FraudService { get; set; }
 
 		public IList<PaymentOrderLine> OrderLines { get; set;}
+		public AgreementConfig AgreementConfig { get; set;}
 
 		public ReserveRequest() 
 		{
