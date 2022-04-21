@@ -28,6 +28,7 @@ namespace AltaPay.Service
 		public FraudService FraudService { get; set; }
 
 		public IList<PaymentOrderLine> OrderLines { get; set;}
+		public AgreementConfig AgreementConfig { get; set;}
 
 		public ReserveRequest() 
 		{

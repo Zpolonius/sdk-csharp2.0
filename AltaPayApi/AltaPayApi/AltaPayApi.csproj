@@ -9,11 +9,11 @@
 	  <RepositoryUrl>https://github.com/AltaPay/sdk-csharp2.0</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
 	  <PackageReleaseNotes>- Supports API changes from 20210324</PackageReleaseNotes>
-	  <AssemblyVersion>1.0.0.0</AssemblyVersion>
-	  <FileVersion>1.0.0.0</FileVersion>
+	  <AssemblyVersion>1.0.0.1</AssemblyVersion>
+	  <FileVersion>1.0.0.1</FileVersion>
 	  <Authors>AltaPay</Authors>
 	  <Product>Altapay - API C_Sharp</Product>
-	  <PackageTags>1.0.0</PackageTags>
+	  <PackageTags>1.0.1</PackageTags>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
