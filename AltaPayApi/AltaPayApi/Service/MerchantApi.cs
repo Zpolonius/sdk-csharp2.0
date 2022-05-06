@@ -279,7 +279,7 @@ namespace AltaPay.Service
 				parameters.Add("transaction_id", request.SubscriptionId);
 			}
 			parameters.Add("amount", request.Amount.GetAmountString());
-			parameters.Add("agreement[unscheduled]", request.AgreementUnscheduledType);
+			parameters.Add("agreement[unscheduled_type]", request.AgreementUnscheduledType);
 
 			return new ChargeSubscriptionResult(GetResponseFromApiCall("chargeSubscription",parameters));
 		}
@@ -293,7 +293,7 @@ namespace AltaPay.Service
 				parameters.Add("transaction_id", request.SubscriptionId);
 			}
 			parameters.Add("amount", request.Amount.GetAmountString());
-			parameters.Add("agreement[unscheduled]", request.AgreementUnscheduledType);
+			parameters.Add("agreement[unscheduled_type]", request.AgreementUnscheduledType);
 
 			return new ReserveSubscriptionChargeResult(GetResponseFromApiCall("reserveSubscriptionCharge", parameters));
 		}
