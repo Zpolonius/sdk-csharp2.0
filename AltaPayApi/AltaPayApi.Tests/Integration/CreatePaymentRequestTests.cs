@@ -314,5 +314,26 @@ namespace AltaPay.Service.Tests.Integration
 
             System.Diagnostics.Process.Start(result.Url);
         }
+
+		[Test]
+		public void CreateSimplePaymentsRequestWithAgreement()
+		{
+			AgreementConfig agreementConfig = new AgreementConfig();
+			agreementConfig.AgreementType = AgreementType.unscheduled;
+			agreementConfig.AgreementUnscheduledType = AgreementUnscheduledType.incremental;
+			PaymentRequestRequest paymentRequest = new PaymentRequestRequest() {
+				Terminal = 	GatewayConstants.terminal,
+				ShopOrderId = "IT_AGREEMENT_UI_payment-req-" + Guid.NewGuid().ToString(),
+				Amount = Amount.Get(77.77,Currency.EUR),
+				AgreementConfig = agreementConfig,
+			};
+			
+			PaymentRequestResult result = _api.CreatePaymentRequest(paymentRequest);
+			Assert.AreEqual(null, result.ResultMerchantMessage);
+			Assert.AreEqual(Result.Success, result.Result);
+			Assert.IsNotEmpty(result.Url);
+			Assert.IsNotEmpty(result.DynamicJavascriptUrl);
+			Assert.IsNotEmpty(result.PaymentRequestId);			
+		}
 	}
 }

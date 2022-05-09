@@ -333,6 +333,91 @@ namespace AltaPay.Service.Tests.Integration
             Assert.IsTrue(CompareCustomerInfos(result.Payment.CustomerInfo));
         }
 
+        [Test]
+        public void ReserveAmountWithAgreementAndWithoutOrderlines()
+        {
+            //arrange
+            var sixMonthsFromNowDate = DateTime.Now.AddMonths(6);
+            var shopOrderId = "IT_AGREEMENTS_UI_csharp_" + Guid.NewGuid().ToString();
+            double amount = 7.7;
+            var currency = Currency.DKK;
+            AgreementConfig agreementConfig = new AgreementConfig();
+            agreementConfig.AgreementType = AgreementType.unscheduled;
+            agreementConfig.AgreementUnscheduledType = AgreementUnscheduledType.incremental;
+            var request = new ReserveRequest
+            {
+                Source = PaymentSource.eCommerce,
+                ShopOrderId = shopOrderId,
+                Terminal = _testTerminal,
+                PaymentType = AuthType.payment,
+                Amount = Amount.Get(amount, currency),
+                Pan = "4111000011110002",
+                ExpiryMonth = sixMonthsFromNowDate.Month,
+                ExpiryYear = sixMonthsFromNowDate.Year,
+                Cvc = "123",
+                CustomerInfo = InitializeCustomerInfoTestData(),
+                AgreementConfig = agreementConfig,
+            };
+
+            //act
+            ReserveResult result = _api.ReserveAmount(request);
+
+            //assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Result);
+            Assert.IsNotNull(result.Payment);
+
+            Assert.AreEqual(result.Result, Result.Success);
+            Assert.AreEqual(result.Payment.TransactionStatus, GatewayConstants.PreauthTransactionStatus);
+            Assert.AreEqual(result.Payment.ShopOrderId, shopOrderId);
+            Assert.AreEqual(result.Payment.ReservedAmount, amount);
+            Assert.AreEqual(result.Payment.MerchantCurrencyAlpha, currency.ShortName);
+            Assert.IsTrue(CompareCustomerInfos(result.Payment.CustomerInfo));
+        }
+
+        [Test]
+        public void ReserveAmountWithAgreementAndOrderlines()
+        {
+            //arrange
+            var sixMonthsFromNowDate = DateTime.Now.AddMonths(6);
+            var shopOrderId = "IT_AGREEMENTS_UI_csharp_" + Guid.NewGuid().ToString();
+            double amount = 77.7;
+            var currency = Currency.DKK;
+            AgreementConfig agreementConfig = new AgreementConfig();
+            agreementConfig.AgreementType = AgreementType.unscheduled;
+            agreementConfig.AgreementUnscheduledType = AgreementUnscheduledType.incremental;
+            var request = new ReserveRequest
+            {
+                Source = PaymentSource.eCommerce,
+                ShopOrderId = shopOrderId,
+                Terminal = _testTerminal,
+                PaymentType = AuthType.payment,
+                Amount = Amount.Get(amount, currency),
+                Pan = "4111000011110002",
+                ExpiryMonth = sixMonthsFromNowDate.Month,
+                ExpiryYear = sixMonthsFromNowDate.Year,
+                Cvc = "123",
+                CustomerInfo = InitializeCustomerInfoTestData(),
+                OrderLines = InitializeOrderlinesTestData(),
+                AgreementConfig = agreementConfig,
+            };
+
+            //act
+            ReserveResult result = _api.ReserveAmount(request);
+
+            //assert
+            Assert.IsNotNull(result);
+            Assert.IsNotNull(result.Result);
+            Assert.IsNotNull(result.Payment);
+
+            Assert.AreEqual(result.Result, Result.Success);
+            Assert.AreEqual(result.Payment.TransactionStatus, GatewayConstants.PreauthTransactionStatus);
+            Assert.AreEqual(result.Payment.ShopOrderId, shopOrderId);
+            Assert.AreEqual(result.Payment.ReservedAmount, amount);
+            Assert.AreEqual(result.Payment.MerchantCurrencyAlpha, currency.ShortName);
+            Assert.IsTrue(CompareCustomerInfos(result.Payment.CustomerInfo));
+        }
+
         #endregion ReserveAmount tests
 
         #region Credit tests

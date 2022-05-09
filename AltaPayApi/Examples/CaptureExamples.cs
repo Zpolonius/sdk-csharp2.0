@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Examples
 {
@@ -60,6 +61,43 @@ namespace Examples
                 //error messages contain information about what went wrong
                 string errorMerchantMessage = captureResult.ResultMerchantMessage;
                 string errorMessage = captureResult.ResultMessage;
+            }
+        }
+        
+        /// <summary>
+        /// Example for performing charge subscription request with Agreement.
+        /// </summary>
+        public void ChargeSubscriptionWithAgreement()
+        {
+            //Set up an agreement / setupSubscription / Reserving amount in order to charge it later
+            PaymentResult createPaymentResult = ReserveAmount(Amount.Get(7777.00, Currency.EUR), AuthType.subscription, "IT_AGREEMENTS_UI_");
+            //Transaction ID is returned from the gateway when payment request was successful
+            string transactionId = createPaymentResult.Payment.TransactionId;
+            //WaitForDataToFlowIntoReporting
+            Thread.Sleep(3000);
+            //initialise charge subscription request class, this class is used for forwarding all the data needed for charging an agreement / charge subscription request
+            var chargeSubscriptionRequest = new ChargeSubscriptionRequest()
+            {
+                AgreementId = transactionId,
+                Amount = Amount.Get(7777, Currency.XXX),
+                AgreementUnscheduledType = AgreementUnscheduledType.incremental,
+            };
+
+            //call capture method
+            SubscriptionResult subscriptionResult = _api.ChargeSubscription(chargeSubscriptionRequest);
+
+            //Result property contains information if the request was successful or not
+            if ((subscriptionResult.Result == Result.Success) && (createPaymentResult.Payment.TransactionId == subscriptionResult.Payment.TransactionId) && (subscriptionResult.Payment.TransactionStatus == "recurring_confirmed") && (subscriptionResult.RecurringPayment.TransactionStatus == "captured"))
+            {
+                //subscription charge was successful
+                Transaction transaction = subscriptionResult.Payment;
+            }            
+            else
+            {
+                //capture unsuccessful
+                //error messages contain information about what went wrong
+                string errorMerchantMessage = subscriptionResult.ResultMerchantMessage;
+                string errorMessage = subscriptionResult.ResultMessage;
             }
         }
 
@@ -162,19 +200,27 @@ namespace Examples
         /// <param name="amount"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        private PaymentResult ReserveAmount(Amount amount, AuthType type)
+        private PaymentResult ReserveAmount(Amount amount, AuthType type, String prefix = "")
         {
             var request = new ReserveRequest
             {
-                ShopOrderId = "csharpexample" + Guid.NewGuid().ToString(),
+                ShopOrderId = prefix + "csharpexample" + Guid.NewGuid().ToString(),
                 Terminal = "AltaPay Dev Terminal",
                 Amount = amount,
                 PaymentType = type,
                 Pan = "4111000011110000",
                 ExpiryMonth = 1,
-                ExpiryYear = 2012,
+                ExpiryYear = 2025,
                 Cvc = "123",
             };
+
+            if (prefix != "")
+            {
+                var agreementConfig = new AgreementConfig();
+                agreementConfig.AgreementType = AgreementType.unscheduled;
+                agreementConfig.AgreementUnscheduledType = AgreementUnscheduledType.incremental;
+                request.AgreementConfig = agreementConfig;
+            }
 
             PaymentResult result = _api.ReserveAmount(request);
 
@@ -186,6 +232,6 @@ namespace Examples
             return result;
         }
 
-        #endregion helprers
+        #endregion helpers
     }
 }
