@@ -504,6 +504,28 @@ namespace AltaPay.Service
 			return parameter;
 		}
 
+		public CardWalletSessionResult CardWalletSession(CardWalletSessionRequest request)
+		{
+			Dictionary<string, Object> parameters = new Dictionary<string, Object>();
+			// Mandatory
+			parameters.Add("terminal", request.Terminal);
+			parameters.Add("validationUrl", request.ValidationUrl);
+			parameters.Add("domain", request.Domain);
+
+			return new CardWalletSessionResult(GetResponseFromApiCall("cardWallet/session", parameters));
+		}
+
+		public CardWalletAuthorizeResult CardWalletAuthorize(CardWalletAuthorizeRequest request)
+		{
+			var parameters = GetBasicCreatePaymentRequestParameters(request);
+
+			// Mandatory
+			parameters.Add("provider_data", request.ProviderData);
+			parameters.Add("amount", request.Amount.GetAmountString());
+
+			return new CardWalletAuthorizeResult(GetResponseFromApiCall("cardWallet/authorize", parameters));
+		}
+
 		private string StreamToString(Stream stream)
 		{
 			var sr = new StreamReader(stream);
