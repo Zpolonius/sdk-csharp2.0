@@ -24,7 +24,6 @@ namespace AltaPay.Service
 		public string Cookie { get; set; }
 		public PaymentRequestConfig Config { get; set; }
 		public FraudService FraudService { get; set; }
-		public AgreementConfig AgreementConfig { get; set; }
 	}
 }
 

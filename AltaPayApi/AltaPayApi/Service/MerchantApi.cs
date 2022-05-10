@@ -348,11 +348,6 @@ namespace AltaPay.Service
 			parameters.Add("cookie", request.Cookie);
 			parameters.Add("fraud_service", request.FraudService.ToString().ToLower());
 
-			// Agreement parameters
-			if (request.AgreementConfig != null){
-				parameters.Add("agreement", request.AgreementConfig.ToDictionary());
-			}
-
 			return parameters;
 		}
 
@@ -435,6 +430,12 @@ namespace AltaPay.Service
 
 			// Order lines
 			parameters = getOrderLines(parameters, request.OrderLines);
+
+			// Agreement parameters
+			if (request.AgreementConfig != null)
+			{
+				parameters.Add("agreement", request.AgreementConfig.ToDictionary());
+			}
 
 			return new PaymentRequestResult(GetResponseFromApiCall("createPaymentRequest", parameters));
 		}
