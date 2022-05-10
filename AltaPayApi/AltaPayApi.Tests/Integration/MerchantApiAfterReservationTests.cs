@@ -248,7 +248,7 @@ namespace AltaPay.Service.Tests.Integration
             Assert.AreEqual("captured", result.RecurringPayment.TransactionStatus);
         }
 
-		private PaymentResult ReserveAmount(double amount, AuthType type, String prefix = "")
+		private PaymentResult ReserveAmount(double amount, AuthType type, string prefix = "")
 		{
 			var request = new ReserveRequest {
 				ShopOrderId = prefix +"csharptest"+Guid.NewGuid().ToString(),

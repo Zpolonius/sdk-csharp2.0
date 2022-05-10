@@ -200,7 +200,7 @@ namespace Examples
         /// <param name="amount"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        private PaymentResult ReserveAmount(Amount amount, AuthType type, String prefix = "")
+        private PaymentResult ReserveAmount(Amount amount, AuthType type, string prefix = "")
         {
             var request = new ReserveRequest
             {
