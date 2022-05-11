@@ -432,8 +432,7 @@ namespace AltaPay.Service
 			parameters = getOrderLines(parameters, request.OrderLines);
 
 			// Agreement parameters
-			if (request.AgreementConfig != null)
-			{
+			if (request.AgreementConfig != null){
 				parameters.Add("agreement", request.AgreementConfig.ToDictionary());
 			}
 

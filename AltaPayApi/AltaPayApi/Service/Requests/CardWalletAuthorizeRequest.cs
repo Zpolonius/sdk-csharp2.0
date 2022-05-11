@@ -26,4 +26,3 @@ namespace AltaPay.Service
 		}		
 	}
 }
-
