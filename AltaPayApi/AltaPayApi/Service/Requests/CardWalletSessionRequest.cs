@@ -6,7 +6,7 @@ namespace AltaPay.Service
 	public class CardWalletSessionRequest
 	{		
 		public string Terminal { get; set; }
-		public string ValidationUrl { get; set;}
+		public string ValidationUrl { get; set; }
 		public string Domain { get; set; }
 
 		public CardWalletSessionRequest(string terminal, string validationUrl, string domain)
