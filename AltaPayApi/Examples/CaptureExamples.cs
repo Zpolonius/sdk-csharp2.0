@@ -202,6 +202,7 @@ namespace Examples
         /// <returns></returns>
         private PaymentResult ReserveAmount(Amount amount, AuthType type, string includeAgreementConfig = "")
         {
+            var sixMonthsFromNowDate = DateTime.Now.AddMonths(6);
             var request = new ReserveRequest
             {
                 ShopOrderId = includeAgreementConfig + "csharpexample" + Guid.NewGuid().ToString(),
@@ -209,8 +210,8 @@ namespace Examples
                 Amount = amount,
                 PaymentType = type,
                 Pan = "4111000011110000",
-                ExpiryMonth = 1,
-                ExpiryYear = 2025,
+                ExpiryMonth = sixMonthsFromNowDate.Month,
+                ExpiryYear = sixMonthsFromNowDate.Year,
                 Cvc = "123",
             };
 

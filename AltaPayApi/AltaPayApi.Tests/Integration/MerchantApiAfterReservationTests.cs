@@ -250,14 +250,15 @@ namespace AltaPay.Service.Tests.Integration
 
 		private PaymentResult ReserveAmount(double amount, AuthType type, string includeAgreementConfig = "")
 		{
+			var sixMonthsFromNowDate = DateTime.Now.AddMonths(6);
 			var request = new ReserveRequest {
 				ShopOrderId = includeAgreementConfig +"csharptest"+Guid.NewGuid().ToString(),
 				Terminal = "AltaPay Soap Test Terminal",
 				Amount = Amount.Get(amount, Currency.DKK),
 				PaymentType = type,
-				Pan = "4111111111111111",
-				ExpiryMonth = 1,
-				ExpiryYear = 2025,
+				Pan = "4111000011110000",
+				ExpiryMonth = sixMonthsFromNowDate.Month,
+				ExpiryYear = sixMonthsFromNowDate.Year,
 				Cvc = "123",
 			};
 
