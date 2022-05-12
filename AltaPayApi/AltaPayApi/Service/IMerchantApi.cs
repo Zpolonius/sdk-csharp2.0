@@ -30,5 +30,7 @@ namespace AltaPay.Service
 		ApiResult ParsePostBackXmlResponse(Stream responseStr);
 		MultiPaymentApiResult ParseMultiPaymentPostBackXmlResponse(string responseStr);
 		MultiPaymentApiResult ParseMultiPaymentPostBackXmlResponse(Stream responseStream);
+		CardWalletSessionResult CardWalletSession(CardWalletSessionRequest request);
+		CardWalletAuthorizeResult CardWalletAuthorize(CardWalletAuthorizeRequest request);
 	}
 }

@@ -348,11 +348,6 @@ namespace AltaPay.Service
 			parameters.Add("cookie", request.Cookie);
 			parameters.Add("fraud_service", request.FraudService.ToString().ToLower());
 
-			// Agreement parameters
-			if (request.AgreementConfig != null){
-				parameters.Add("agreement", request.AgreementConfig.ToDictionary());
-			}
-
 			return parameters;
 		}
 
@@ -436,6 +431,11 @@ namespace AltaPay.Service
 			// Order lines
 			parameters = getOrderLines(parameters, request.OrderLines);
 
+			// Agreement parameters
+			if (request.AgreementConfig != null){
+				parameters.Add("agreement", request.AgreementConfig.ToDictionary());
+			}
+
 			return new PaymentRequestResult(GetResponseFromApiCall("createPaymentRequest", parameters));
 		}
 
@@ -501,6 +501,28 @@ namespace AltaPay.Service
 			}
 
 			return parameter;
+		}
+
+		public CardWalletSessionResult CardWalletSession(CardWalletSessionRequest request)
+		{
+			Dictionary<string, Object> parameters = new Dictionary<string, Object>();
+			// Mandatory
+			parameters.Add("terminal", request.Terminal);
+			parameters.Add("validationUrl", request.ValidationUrl);
+			parameters.Add("domain", request.Domain);
+
+			return new CardWalletSessionResult(GetResponseFromApiCall("cardWallet/session", parameters));
+		}
+
+		public CardWalletAuthorizeResult CardWalletAuthorize(CardWalletAuthorizeRequest request)
+		{
+			var parameters = GetBasicCreatePaymentRequestParameters(request);
+
+			// Mandatory
+			parameters.Add("provider_data", request.ProviderData);
+			parameters.Add("amount", request.Amount.GetAmountString());
+
+			return new CardWalletAuthorizeResult(GetResponseFromApiCall("cardWallet/authorize", parameters));
 		}
 
 		private string StreamToString(Stream stream)

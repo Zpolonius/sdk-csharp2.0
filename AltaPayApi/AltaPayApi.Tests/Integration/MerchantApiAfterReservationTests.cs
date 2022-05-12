@@ -209,46 +209,46 @@ namespace AltaPay.Service.Tests.Integration
 		}
 
 		[Test]
-        public void ReserveSubscriptionChargeWithAgreementReturnsSuccess()
-        {
-            PaymentResult createPaymentResult = ReserveAmount(7.77,AuthType.subscription, "IT_AGREEMENTS_UI_");
+		public void ReserveSubscriptionChargeWithAgreementReturnsSuccess()
+		{
+			PaymentResult createPaymentResult = ReserveAmount(7.77,AuthType.subscription, "IT_AGREEMENTS_UI_");
 
-            this.WaitForDataToFlowIntoReporting();
+			this.WaitForDataToFlowIntoReporting();
 
-            var request = new ReserveSubscriptionChargeRequest {
-                AgreementId = createPaymentResult.Payment.TransactionId,
-                Amount = Amount.Get(7.77, Currency.XXX),
-                AgreementUnscheduledType = AgreementUnscheduledType.incremental,
-            };
-            SubscriptionResult result = _api.ReserveSubscriptionCharge(request);
+			var request = new ReserveSubscriptionChargeRequest {
+				AgreementId = createPaymentResult.Payment.TransactionId,
+				Amount = Amount.Get(7.77, Currency.XXX),
+				AgreementUnscheduledType = AgreementUnscheduledType.incremental,
+			};
+			SubscriptionResult result = _api.ReserveSubscriptionCharge(request);
 
-            Assert.AreEqual(Result.Success, result.Result);
-            Assert.AreEqual(createPaymentResult.Payment.TransactionId, result.Payment.TransactionId);
-            Assert.AreEqual("recurring_confirmed", result.Payment.TransactionStatus);
-            Assert.AreEqual("preauth", result.RecurringPayment.TransactionStatus);
-        }
+			Assert.AreEqual(Result.Success, result.Result);
+			Assert.AreEqual(createPaymentResult.Payment.TransactionId, result.Payment.TransactionId);
+			Assert.AreEqual("recurring_confirmed", result.Payment.TransactionStatus);
+			Assert.AreEqual("preauth", result.RecurringPayment.TransactionStatus);
+		}
 
 		[Test]
-        public void ChargeSubscriptionWithAgreementReturnsSuccess()
-        {
-            PaymentResult createPaymentResult = ReserveAmount(7.77, AuthType.subscription, "IT_AGREEMENTS_UI_");
+		public void ChargeSubscriptionWithAgreementReturnsSuccess()
+		{
+			PaymentResult createPaymentResult = ReserveAmount(7.77, AuthType.subscription, "IT_AGREEMENTS_UI_");
 
-            this.WaitForDataToFlowIntoReporting();
+			this.WaitForDataToFlowIntoReporting();
 
-            var request = new ChargeSubscriptionRequest() {
-                AgreementId = createPaymentResult.Payment.TransactionId,
-                Amount = Amount.Get(7, Currency.XXX),
-                AgreementUnscheduledType = AgreementUnscheduledType.incremental,
-            };
-            SubscriptionResult result = _api.ChargeSubscription(request);
+			var request = new ChargeSubscriptionRequest() {
+				AgreementId = createPaymentResult.Payment.TransactionId,
+				Amount = Amount.Get(7, Currency.XXX),
+				AgreementUnscheduledType = AgreementUnscheduledType.incremental,
+			};
+			SubscriptionResult result = _api.ChargeSubscription(request);
 
-            Assert.AreEqual(Result.Success, result.Result);
-            Assert.AreEqual(createPaymentResult.Payment.TransactionId, result.Payment.TransactionId);
-            Assert.AreEqual("recurring_confirmed", result.Payment.TransactionStatus);
-            Assert.AreEqual("captured", result.RecurringPayment.TransactionStatus);
-        }
+			Assert.AreEqual(Result.Success, result.Result);
+			Assert.AreEqual(createPaymentResult.Payment.TransactionId, result.Payment.TransactionId);
+			Assert.AreEqual("recurring_confirmed", result.Payment.TransactionStatus);
+			Assert.AreEqual("captured", result.RecurringPayment.TransactionStatus);
+		}
 
-		private PaymentResult ReserveAmount(double amount, AuthType type, String includeAgreementConfig = "")
+		private PaymentResult ReserveAmount(double amount, AuthType type, string includeAgreementConfig = "")
 		{
 			var request = new ReserveRequest {
 				ShopOrderId = includeAgreementConfig +"csharptest"+Guid.NewGuid().ToString(),
@@ -267,7 +267,7 @@ namespace AltaPay.Service.Tests.Integration
 				agreementConfig.AgreementType = AgreementType.unscheduled;
 				agreementConfig.AgreementUnscheduledType = AgreementUnscheduledType.incremental;
 				request.AgreementConfig = agreementConfig;
-            }
+			}
 
 			PaymentResult result = _api.ReserveAmount(request);
 			
