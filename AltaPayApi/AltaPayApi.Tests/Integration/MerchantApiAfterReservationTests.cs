@@ -248,10 +248,10 @@ namespace AltaPay.Service.Tests.Integration
             Assert.AreEqual("captured", result.RecurringPayment.TransactionStatus);
         }
 
-		private PaymentResult ReserveAmount(double amount, AuthType type, String prefix = "")
+		private PaymentResult ReserveAmount(double amount, AuthType type, String includeAgreementConfig = "")
 		{
 			var request = new ReserveRequest {
-				ShopOrderId = prefix +"csharptest"+Guid.NewGuid().ToString(),
+				ShopOrderId = includeAgreementConfig +"csharptest"+Guid.NewGuid().ToString(),
 				Terminal = "AltaPay Soap Test Terminal",
 				Amount = Amount.Get(amount, Currency.DKK),
 				PaymentType = type,
@@ -261,7 +261,7 @@ namespace AltaPay.Service.Tests.Integration
 				Cvc = "123",
 			};
 
-			if(prefix != "")
+			if(includeAgreementConfig != "")
             {
 				var agreementConfig = new AgreementConfig();
 				agreementConfig.AgreementType = AgreementType.unscheduled;

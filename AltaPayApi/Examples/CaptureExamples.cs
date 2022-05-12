@@ -200,11 +200,11 @@ namespace Examples
         /// <param name="amount"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        private PaymentResult ReserveAmount(Amount amount, AuthType type, String prefix = "")
+        private PaymentResult ReserveAmount(Amount amount, AuthType type, String includeAgreementConfig = "")
         {
             var request = new ReserveRequest
             {
-                ShopOrderId = prefix + "csharpexample" + Guid.NewGuid().ToString(),
+                ShopOrderId = includeAgreementConfig + "csharpexample" + Guid.NewGuid().ToString(),
                 Terminal = "AltaPay Dev Terminal",
                 Amount = amount,
                 PaymentType = type,
@@ -214,7 +214,7 @@ namespace Examples
                 Cvc = "123",
             };
 
-            if (prefix != "")
+            if (includeAgreementConfig != "")
             {
                 var agreementConfig = new AgreementConfig();
                 agreementConfig.AgreementType = AgreementType.unscheduled;
