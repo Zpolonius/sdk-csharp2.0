@@ -206,5 +206,62 @@ namespace Examples
                 string errorMessage = paymentRequestResult.ResultMessage;
             }
         }
+
+        /// <summary>
+        /// Example for performing simple create payment request with Agreement.
+        /// </summary>
+        public void CreateSimplePaymentRequestWithAgreement()
+        {
+            //dedicated terminal on the gateway
+            string terminal = "AltaPay Dev Terminal";
+
+            //Instantiation of the payment request class
+            //this class is used for forwarding all the data needed for create payment request
+            //For simple payment request required properties to be set are gateway terminal, shop order ID
+            //and amount along with currency
+            PaymentRequestRequest paymentRequest = new PaymentRequestRequest
+            {
+                Terminal = terminal,
+                ShopOrderId = "AGREEMENTS_UI_csharp_example_payment-req-" + Guid.NewGuid().ToString(),
+                Amount = Amount.Get(777.77, Currency.EUR),
+                //set the properties for redirection URLs
+                //where user should be redirected after submitting payment on the gateway
+                Config = new PaymentRequestConfig
+                {
+                    CallbackFormUrl = "http://demoshop.pensio.com/Form",
+                    CallbackOkUrl = "http://demoshop.pensio.com/Ok",
+                    CallbackFailUrl = "http://demoshop.pensio.com/Fail",
+                    CallbackRedirectUrl = "http://demoshop.pensio.com/Redirect",
+                    CallbackNotificationUrl = "http://demoshop.pensio.com/Notification",
+                    CallbackOpenUrl = "http://demoshop.pensio.com/Open",
+                    CallbackVerifyOrderUrl = "http://demoshop.pensio.com/VerifyOrder"
+                },
+
+                AgreementConfig = new AgreementConfig
+                {
+                    AgreementType = AgreementType.unscheduled,
+                    AgreementUnscheduledType = AgreementUnscheduledType.incremental
+                }
+            };
+
+            //execute create payment method
+            PaymentRequestResult paymentRequestResult = _api.CreatePaymentRequest(paymentRequest);
+
+            //Result property contains information if the request was successful or not
+            if (paymentRequestResult.Result == Result.Success)
+            {
+                //URL to the payment form page to redirect user
+                string paymentFormURL = paymentRequestResult.Url;
+
+                //Payment request ID returned from the gateway
+                string paymentRequestId = paymentRequestResult.PaymentRequestId;
+            }
+            else
+            {
+                //error messages contain information about what went wrong
+                string errorMerchantMessage = paymentRequestResult.ResultMerchantMessage;
+                string errorMessage = paymentRequestResult.ResultMessage;
+            }
+        }
     }
 }

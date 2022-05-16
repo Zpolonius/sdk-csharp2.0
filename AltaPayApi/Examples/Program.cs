@@ -14,6 +14,7 @@ namespace Examples
             CreatePaymentRequestExamples cprExamples = new CreatePaymentRequestExamples();
             cprExamples.CreateSimplePaymentRequest();
             cprExamples.CreateComplexPaymentRequest();
+            cprExamples.CreateSimplePaymentRequestWithAgreement();            
 
             //capture examples
             Console.WriteLine("Executing capture examples...");
@@ -21,6 +22,7 @@ namespace Examples
             captureExamples.SimpleCapture();
             captureExamples.SimplePartialCapture();
             captureExamples.ComplexCapture();
+            captureExamples.ChargeSubscriptionWithAgreement();
 
             //refund examples
             Console.WriteLine("Executing refund examples...");

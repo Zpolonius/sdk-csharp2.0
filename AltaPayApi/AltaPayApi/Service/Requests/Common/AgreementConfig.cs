@@ -19,7 +19,7 @@ namespace AltaPay.Service
 			Dictionary<string,Object> agreementParams = new Dictionary<string,Object>();
 			agreementParams.Add("id", AgreementId);
 			agreementParams.Add("type", AgreementType);
-			agreementParams.Add("unscheduled", AgreementUnscheduledType);
+			agreementParams.Add("unscheduled_type", AgreementUnscheduledType);
 			agreementParams.Add("expiry", AgreementExpiry);
 			agreementParams.Add("frequency", AgreementFrequency);
 			agreementParams.Add("next_charge_date", AgreementNextChargeDate);
