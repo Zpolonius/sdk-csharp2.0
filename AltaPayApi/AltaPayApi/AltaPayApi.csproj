@@ -8,12 +8,12 @@
 	  <Copyright>Copyright (c) 2021</Copyright>
 	  <RepositoryUrl>https://github.com/AltaPay/sdk-csharp2.0</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
-	  <PackageReleaseNotes>- Supports API changes from 20210324</PackageReleaseNotes>
-	  <AssemblyVersion>1.0.0.2</AssemblyVersion>
-	  <FileVersion>1.0.0.2</FileVersion>
+	  <PackageReleaseNotes>Add support for subscription via MobilePay</PackageReleaseNotes>
+	  <AssemblyVersion>1.0.0.3</AssemblyVersion>
+	  <FileVersion>1.0.0.3</FileVersion>
 	  <Authors>AltaPay</Authors>
 	  <Product>Altapay - API C_Sharp</Product>
-	  <PackageTags>1.0.2</PackageTags>
+	  <PackageTags>1.0.3</PackageTags>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
