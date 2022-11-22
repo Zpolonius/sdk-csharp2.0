@@ -13,6 +13,7 @@ namespace AltaPay.Service
 		public string AgreementFrequency { get; set; }
 		public string AgreementNextChargeDate { get; set; }
 		public string AgreementAdminUrl { get; set; }
+		public string AgreementRetentionPeriod { get; set; }
 		
 		public Dictionary<string,Object> ToDictionary()
 		{
@@ -24,6 +25,7 @@ namespace AltaPay.Service
 			agreementParams.Add("frequency", AgreementFrequency);
 			agreementParams.Add("next_charge_date", AgreementNextChargeDate);
 			agreementParams.Add("admin_url", AgreementAdminUrl);
+			agreementParams.Add("retention_period", AgreementRetentionPeriod);
 			
 			return agreementParams;
 		}
