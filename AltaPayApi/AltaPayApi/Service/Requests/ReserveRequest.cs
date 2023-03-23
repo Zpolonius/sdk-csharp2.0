@@ -29,13 +29,16 @@ namespace AltaPay.Service
 
 		public IList<PaymentOrderLine> OrderLines { get; set;}
 		public AgreementConfig AgreementConfig { get; set;}
+        public PaymentRequestConfig Config { get; set; }
 
-		public ReserveRequest() 
+
+        public ReserveRequest() 
 		{
 			Source = PaymentSource.moto;
 			CustomerInfo = new CustomerInfo();
 			OrderLines = new List<PaymentOrderLine>();
-		}
-	}
+            Config = new PaymentRequestConfig();
+        }
+    }
 }
 
