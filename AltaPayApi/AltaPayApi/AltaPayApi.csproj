@@ -8,12 +8,12 @@
 	  <Copyright>Copyright (c) 2021</Copyright>
 	  <RepositoryUrl>https://github.com/AltaPay/sdk-csharp2.0</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
-	  <PackageReleaseNotes>Add support for redirect response in reservation, chargeSubscription, reserveSubscriptionCharge</PackageReleaseNotes>
-	  <AssemblyVersion>1.0.0.4</AssemblyVersion>
-	  <FileVersion>1.0.0.4</FileVersion>
+	  <PackageReleaseNotes>Supports API changes from 20230412</PackageReleaseNotes>
+	  <AssemblyVersion>1.0.0.5</AssemblyVersion>
+	  <FileVersion>1.0.0.5</FileVersion>
 	  <Authors>AltaPay</Authors>
 	  <Product>Altapay - API C_Sharp</Product>
-	  <PackageTags>1.0.4</PackageTags>
+	  <PackageTags>1.0.5</PackageTags>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 

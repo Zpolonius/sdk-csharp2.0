@@ -298,11 +298,11 @@ namespace AltaPay.Service
 			return new ReserveSubscriptionChargeResult(GetResponseFromApiCall("reserveSubscriptionCharge", parameters));
 		}
 
-		public FundingsResult GetFundings(GetFundingsRequest request)
+		public FundingsResult GetFundings (GetFundingsRequest request)
 		{
-			Dictionary<string,Object> parameters = new Dictionary<string, Object>();
-			parameters.Add("page", request.Page);
-			return new FundingsResult(GetResponseFromApiCall("fundingList",parameters), new NetworkCredential(_username, _password));
+			Dictionary<string, Object> parameters = new Dictionary<string, Object> ();
+			parameters.Add ("page", request.Page);
+			return new FundingsResult (GetResponseFromApiCall ("fundingList", parameters, "GET"), new NetworkCredential (_username, _password));
 		}
 
 		public FundingContentResult GetFundingContent(Funding funding)
@@ -653,10 +653,9 @@ namespace AltaPay.Service
 			}
 		}
 
-		private APIResponse GetResponseFromApiCall(string method, Dictionary<string,Object> parameters)
+		private APIResponse GetResponseFromApiCall (string method, Dictionary<string, Object> parameters, String requestMethod = "POST")
 		{
-			using (Stream responseStream = CallApi(method, parameters))
-			{
+			using (Stream responseStream = CallApi (method, parameters, requestMethod)) {
 				/*
 				// dumping response for debugging... this would be easier with .NET 4 as it has Stream.CopyTo(..)
 				using (var fileStream = File.Create("/tmp/multipaymentrequest_response"))
@@ -670,7 +669,7 @@ namespace AltaPay.Service
 					}
 				}//*/
 
-				return GetApiResponse(responseStream);
+				return GetApiResponse (responseStream);
 			}
 		}
 
@@ -689,30 +688,39 @@ namespace AltaPay.Service
 			return _sdkVersion;
 		}
 
-		private Stream CallApi(string method, Dictionary<string,Object> parameters)
+		private Stream CallApi (string method, Dictionary<string, Object> parameters, string requestMethod)
 		{
-		    //Use either TLS 1.1 or TLS 1.2
-		    System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+			//Use either TLS 1.1 or TLS 1.2
+			System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
-			WebRequest request = WebRequest.Create(String.Format("{0}{1}", _gatewayUrl, method));
-			request.Credentials = new NetworkCredential(_username, _password);
+			string encodedData = ParameterHelper.Convert (parameters);
+
+			if (requestMethod == "GET") {
+				method = method + "?" + encodedData;
+			}
+
+			WebRequest request = WebRequest.Create (String.Format ("{0}{1}", _gatewayUrl, method));
+			request.Credentials = new NetworkCredential (_username, _password);
 
 			HttpWebRequest http = (HttpWebRequest)request;
-			http.Method = "POST";
-			http.ContentType = "application/x-www-form-urlencoded";
-			http.UserAgent = String.Format("sdk-csharp/{0}, CLR/{1}", GetSdkVersion(), Environment.Version.ToString());
+			http.Method = requestMethod;
+			http.UserAgent = String.Format ("sdk-csharp/{0}, CLR/{1}", GetSdkVersion (), Environment.Version.ToString ());
 
-			string encodedData = ParameterHelper.Convert(parameters);
-			//File.AppendAllText("/tmp/multipaymentrequest", + encodedData + "\n");
-			Byte[] postBytes = System.Text.Encoding.ASCII.GetBytes(encodedData);
-			http.ContentLength = postBytes.Length;
+			if (requestMethod == "POST") {
+				http.ContentType = "application/x-www-form-urlencoded";
 
-			Stream requestStream = request.GetRequestStream();
-			requestStream.Write(postBytes, 0, postBytes.Length);
-			requestStream.Close();
+				//File.AppendAllText("/tmp/multipaymentrequest", + encodedData + "\n");
+				Byte [] postBytes = System.Text.Encoding.ASCII.GetBytes (encodedData);
+				http.ContentLength = postBytes.Length;
 
-			WebResponse response = request.GetResponse();
-			return response.GetResponseStream();
+				Stream requestStream = request.GetRequestStream ();
+				requestStream.Write (postBytes, 0, postBytes.Length);
+				requestStream.Close ();
+
+			}
+
+			WebResponse response = request.GetResponse ();
+			return response.GetResponseStream ();
 		}
 
 		private T ConvertXml<T>(Stream xml)
