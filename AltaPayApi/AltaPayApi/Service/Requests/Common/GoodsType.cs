@@ -11,8 +11,8 @@ namespace AltaPay.Service
 		Discount,
 		Gift_Card,
 		Info,
-		Physicak,
-		sales_tax
+		Physical,
+		Sales_tax,
 		Refund,
 		Subscription_Model
 	}
